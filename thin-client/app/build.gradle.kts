@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -11,6 +13,22 @@ android {
     namespace = "com.opencode.thin"
     compileSdk = 35
 
+    val keystorePropertiesFile = file("key.properties")
+    val keystoreProperties = Properties()
+    if (keystorePropertiesFile.exists()) {
+        keystoreProperties.load(keystorePropertiesFile.inputStream())
+    }
+
+    signingConfigs {
+        create("release") {
+            val storeFileProp = keystoreProperties["storeFile"] as? String
+            keyAlias = keystoreProperties["keyAlias"] as? String ?: "opencode_connect"
+            keyPassword = keystoreProperties["keyPassword"] as? String ?: "opencode123"
+            storeFile = if (storeFileProp != null) file(storeFileProp) else file("release-keystore.jks")
+            storePassword = keystoreProperties["storePassword"] as? String ?: "opencode123"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.opencode.thin"
         minSdk = 29
@@ -23,6 +41,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
