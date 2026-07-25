@@ -10,6 +10,18 @@ OpenCode Connect is a native Android app (Kotlin + Jetpack Compose) that communi
 **Min SDK:** 29 (Android 10)  
 **Target SDK:** 34 (Android 14)
 
+## Screenshots
+
+<p align="center">
+  <img src="images/1.JPEG" width="140" />
+  <img src="images/2.JPEG" width="140" />
+  <img src="images/3.JPEG" width="140" />
+  <img src="images/4.JPEG" width="140" />
+  <img src="images/5.JPEG" width="140" />
+  <img src="images/6.JPEG" width="140" />
+  <img src="images/7.JPEG" width="140" />
+</p>
+
 ## Architecture
 
 The app follows an MVVM pattern with Hilt dependency injection:
