@@ -136,10 +136,10 @@ data class ShellRequest(
 @Serializable
 data class FileDiff(
     val file: String = "",
-    val before: String = "",
-    val after: String = "",
+    val patch: String = "",
     val additions: Int = 0,
     val deletions: Int = 0,
+    val status: String = "",
 )
 
 @Serializable
@@ -235,7 +235,8 @@ data class McpStatus(
 
 @Serializable
 data class VcsInfo(
-    val branch: String? = null,
+    val branch: String = "",
+    @SerialName("default_branch") val defaultBranch: String = "",
 )
 
 @Serializable

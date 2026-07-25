@@ -72,8 +72,8 @@ interface OpencodeApi {
         @Body body: ShellRequest,
     ): MessageResponse
 
-    @GET("session/{id}/diff")
-    suspend fun getSessionDiff(@Path("id") id: String): List<FileDiff>
+    @GET("vcs/diff")
+    suspend fun getVcsDiff(@Query("mode") mode: String = "git"): List<FileDiff>
 
     @POST("session/{id}/init")
     suspend fun initSession(

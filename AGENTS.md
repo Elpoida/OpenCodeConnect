@@ -77,6 +77,15 @@ All data classes in `Models.kt` map to opencode API JSON responses. Critical det
 ### URL Handling
 - Normalize user-entered URLs in `ConnectViewModel`: prepend `http://` if no scheme present
 - Saved `ConnectionConfig.baseUrl` always has scheme (normalized before save)
+
+### Git Diff / VCS
+- `GET /session/{id}/diff` returns cached diffs from session messages, not live working tree
+- For live diffs, use `GET /vcs/diff?mode=git` — this runs `git diff HEAD` on the server
+- Response format: `[{file, patch, additions, deletions, status}]` (not `before`/`after`)
+- Git actions (stage, unstage, commit, discard) run via `POST /session/{id}/shell` with `command git ...` prefix to bypass aliases
+- Commit message is single-quote escaped to prevent shell injection
+- Diff list refreshes automatically after each git action
+- `VcsInfo` from `GET /vcs` provides current branch name for top-bar display
 ## Building
 ```bash
 export JAVA_HOME=$HOME/.jdks/jdk-21.0.11+10

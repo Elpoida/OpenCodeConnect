@@ -71,8 +71,12 @@ class SessionRepository @Inject constructor(
         )
     }
 
-    suspend fun getSessionDiff(id: String): Result<List<FileDiff>> = runCatching {
-        api.getSessionDiff(id)
+    suspend fun getVcsInfo(): Result<VcsInfo> = runCatching {
+        api.getVcsInfo()
+    }
+
+    suspend fun getVcsDiff(): Result<List<FileDiff>> = runCatching {
+        api.getVcsDiff()
     }
 
     suspend fun runShell(sessionId: String, command: String): Result<MessageResponse> = runCatching {

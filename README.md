@@ -108,8 +108,13 @@ thin-client/
   - Sends answer as new chat message (auto-aborts stuck session)
 
 ### Git
-- View session diffs via `/session/:id/diff`
-- Shows file name, additions (+), deletions (-)
+- View live working-tree diffs via `GET /vcs/diff?mode=git`
+- Shows file name, status badge (added/modified/deleted), additions (+), deletions (-), and full patch content
+- Current branch displayed in top bar
+- **Stage All** — runs `git add -A` via shell endpoint
+- **Unstage** — runs `git restore --staged .`
+- **Commit** — dialog with message input, runs `git commit -m`
+- **Discard** — confirmation dialog, runs `git restore .`
 
 ## Theme
 - Primary: #CA4C07 (orange)
